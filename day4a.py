@@ -1,6 +1,3 @@
-import time
-start = time.time()
-
 def win(line):
     line = line.split(":")[-1]
     left, right = map(str.split, line.split("|"))
@@ -17,5 +14,3 @@ print(sum(cards.values()))
 
 if __name__ == '__main__':
     pass
-
-print(time.time() - start)
