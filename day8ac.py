@@ -25,10 +25,9 @@ spöke_steg = [sök(början, "Z") för början i spöke_början]
 samtidigt = reducera(minsta_gemensamma_multipel, spöke_steg)
 skriv(samtidigt)
 """
-from itertools import repeat
+import re
 
 code = __doc__
-import re
 for sv, en in (('från', 'from'), ('importera', 'import'), ('matematik', 'math'),
     ('som', 'as'), ('skriv', 'print'), ('i', 'in'), ('för', 'for'),
     ('öppna', 'open'), ("räknaupp", "enumerate"), ("slutarmed", "endswith"),
