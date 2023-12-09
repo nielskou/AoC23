@@ -35,8 +35,8 @@ humidity-to-location map:
 60 56 37
 56 93 4"""
 
-seeds_txt, *maps_txt = example.split("\n\n")
-# seeds_txt, *maps_txt = open("day5.txt").read().split("\n\n")
+# seeds_txt, *maps_txt = example.split("\n\n")
+seeds_txt, *maps_txt = open("day5.txt").read().split("\n\n")
 
 
 seeds = [int(seed) for seed in re.findall(r"\d+", seeds_txt)]
@@ -53,10 +53,10 @@ def parse_map(txt):
 maps = [parse_map(txt) for txt in maps_txt]
 
 def fill_map(mapping):
-    low = src = span = diff = 0
+    low = -10e18
+    src = span = diff = 0
     for dst, src, span in mapping:
-        if src > 0:
-            yield low, src -1, diff
+        yield low, src -1, diff
         diff = dst - src
         low = src
     yield low, src + span - 1, diff
@@ -95,12 +95,15 @@ def _convert_ranges(mapping, rangeset):
 def location_ranges(seed_ranges):
     ranges = seed_ranges
     for name, mapping in maps:
+        print(ranges)
         ranges = convert_ranges(mapping, ranges)
+    print(sorted(ranges))
     return list(ranges)
 
 def pairs(seeds):
     seed = iter(seeds)
-    yield next(seed), next(seed)
+    for item in seed:
+        yield item, item + next(seed) - 1
 
 
 locations = list(map(location, seeds))
@@ -109,9 +112,9 @@ print(locations)
 print(min(locations))
 
 print("part2")
-seed_ranges = pairs(seeds)
+seed_ranges = list(pairs(seeds))
 location_range = location_ranges(seed_ranges)
-print(location_range)
+print(sorted(location_range)[0][1])
 
 if __name__ == '__main__':
     pass
