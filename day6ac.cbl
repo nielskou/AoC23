@@ -15,15 +15,13 @@ PROCEDURE DIVISION.
     SUBTRACT MilliMeters FROM MilliSeconds GIVING ResultSquared.
 
     MOVE ResultSquared TO Result.
-    PERFORM 100 TIMES
-        PERFORM ApproximateRoot
-    END-PERFORM.
+    PERFORM ApproximateRoot 100 TIMES.
 
     DISPLAY Result.
     STOP RUN.
 
-    ApproximateRoot SECTION.
-        DIVIDE ResultSquared BY Result GIVING Improvement.
-        ADD Improvement TO Result.
-        DIVIDE Result BY 2 GIVING Result.
-        EXIT.
+ApproximateRoot SECTION.
+    DIVIDE ResultSquared BY Result GIVING Improvement.
+    ADD Improvement TO Result.
+    DIVIDE Result BY 2 GIVING Result.
+    EXIT.
